@@ -46,9 +46,9 @@
                     Remember Me
                   </label>
                 </div>
-                <a href="{{url('auth/forgot-password-basic')}}">
+                <!-- <a href="{{url('auth/forgot-password-basic')}}">
                   <span>Forgot Password?</span>
-                </a>
+                </a> -->
               </div>
             </div>
             <div class="mb-6">
@@ -56,12 +56,12 @@
             </div>
           </form>
 
-          <p class="text-center">
+          <!-- <p class="text-center">
             <span>New on our platform?</span>
             <a href="{{url('auth/register-basic')}}">
               <span>Create an account</span>
             </a>
-          </p>
+          </p> -->
         </div>
       </div>
     </div>

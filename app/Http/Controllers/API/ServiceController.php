@@ -16,7 +16,11 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        // Decode raw JSON
+        $data = json_decode($request->getContent(), true);
+
+        // Validate manually
+        $validated = validator($data, [
             'fname' => 'nullable|string|max:255',
             'lname' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20',
@@ -25,10 +29,15 @@ class ServiceController extends Controller
             'transaction_type' => 'nullable|string|max:255',
             'scam_amount' => 'nullable|string|max:255',
             'scam_description' => 'nullable|string',
-        ]);
+        ])->validate();
 
+        // Create the service
         $service = Service::create($validated);
 
-        return response()->json(['message' => 'Service created successfully', 'data' => $service], 201);
+        // Return JSON response
+        return response()->json([
+            'message' => 'Service created successfully',
+            'data' => $service
+        ], 201);
     }
 }

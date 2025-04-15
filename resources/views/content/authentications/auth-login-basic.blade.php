@@ -25,10 +25,11 @@
           <!-- /Logo -->
           <h4 class="mb-1">Welcome to {{config('variables.templateName')}}! 👋</h4>
 
-          <form id="formAuthentication" class="mb-6" action="{{url('/')}}" method="GET">
+          <form id="formAuthentication" class="mb-6" action="{{ url('/login') }}" method="POST">
+            @csrf
             <div class="mb-6">
               <label for="email" class="form-label">Email or Username</label>
-              <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus>
+              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email or username" autofocus>
             </div>
             <div class="mb-6 form-password-toggle">
               <label class="form-label" for="password">Password</label>

@@ -8,11 +8,11 @@ $navbarDetached = ($navbarDetached ?? '');
 <!-- Navbar -->
 @if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
 <nav class="layout-navbar {{$containerNav}} navbar navbar-expand-xl {{$navbarDetached}} align-items-center bg-navbar-theme" id="layout-navbar">
-@endif
-@if(isset($navbarDetached) && $navbarDetached == '')
-<nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
-  <div class="{{$containerNav}}">
-    @endif
+  @endif
+  @if(isset($navbarDetached) && $navbarDetached == '')
+  <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+    <div class="{{$containerNav}}">
+      @endif
 
       <!--  Brand demo (display only for navbar-full and hide on below xl) -->
       @if(isset($navbarFull))
@@ -97,10 +97,14 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider my-1"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
-                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                  @csrf
+                  <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                  </a>
+                </form>
               </li>
+
             </ul>
           </li>
           <!--/ User -->

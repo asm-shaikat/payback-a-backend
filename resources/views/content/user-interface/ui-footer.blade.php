@@ -52,7 +52,13 @@
             <a class="dropdown-item" href="javascript:void(0);"><i class='bx bx-bitcoin'></i> Bitcoin</a>
           </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger"><i class='bx bx-log-out-circle me-1'></i>Logout</a>
+        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+          @csrf
+          <button type="submit" class="btn btn-sm btn-outline-danger">
+            <i class='bx bx-log-out-circle me-1'></i>Logout
+          </button>
+        </form>
+
       </div>
     </div>
   </footer>

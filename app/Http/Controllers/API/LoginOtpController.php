@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API\Auth;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\EmailOtp;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
-class LoginOtpApiController extends Controller
+class LoginOtpController extends Controller
 {
     // POST /api/send-otp
     public function sendOtp(Request $request)

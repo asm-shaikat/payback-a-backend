@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\API\Auth\LoginOtpApiController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\LoginOtpController;
+use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\TestController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\ServiceController;
-use App\Http\Controllers\API\UserController;
 
 // Public routes
-Route::post('/send-otp', [LoginOtpApiController::class, 'sendOtp']);
-Route::post('/verify-otp', [LoginOtpApiController::class, 'verifyOtp']);
+Route::get('/test', [TestController::class, 'TestFunc']);
+
+Route::post('/send-otp', [LoginOtpController::class, 'sendOtp']);
+Route::post('/verify-otp', [LoginOtpController::class, 'verifyOtp']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -22,3 +25,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');

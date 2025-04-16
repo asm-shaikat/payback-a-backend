@@ -43,6 +43,7 @@ use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Authentication Routes
@@ -62,6 +63,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/{id}', [AdminProfileController::class, 'update'])->name('admin.update');
         Route::get('/change-password', [AdminProfileController::class, 'changePassword'])->name('admin.password-change');
         Route::post('/send-change-password', [AdminProfileController::class, 'SendchangePassword'])->name('send.admin-password-change');
+    });
+
+    Route::prefix('services')->group(function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('services.index');
+        Route::put('/{id}', [ServiceController::class, 'update'])->name('services.update');
+        Route::get('/{id}', [ServiceController::class, 'show'])->name('services.show');
+        Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
     // layout

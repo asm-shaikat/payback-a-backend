@@ -10,8 +10,8 @@ class ServiceController extends Controller
     // Show all services
     public function index()
     {
-        $services = Service::all();
-        return view('services.index', compact('services'));
+        $services = Service::paginate(10);
+        return view('content.services.service', compact('services'));
     }
 
     // Show form to create a new service
@@ -43,7 +43,7 @@ class ServiceController extends Controller
     public function show($id)
     {
         $service = Service::findOrFail($id);
-        return view('services.show', compact('service'));
+        return response()->json($service);
     }
 
     // Show edit form

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\layouts\WithoutMenu;
@@ -55,6 +56,13 @@ Route::middleware('auth')->group(function () {
 
     // Main Page Route
     Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [AdminProfileController::class, 'index']);
+        Route::put('/{id}', [AdminProfileController::class, 'update'])->name('admin.update');
+        Route::get('/change-password', [AdminProfileController::class, 'changePassword'])->name('admin.password-change');
+        Route::post('/send-change-password', [AdminProfileController::class, 'SendchangePassword'])->name('send.admin-password-change');
+    });
 
     // layout
     Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');

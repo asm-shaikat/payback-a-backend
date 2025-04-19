@@ -11,10 +11,22 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Service::all(), 200);
+        $query = Service::query();
+
+        // Apply filters if present
+        if ($request->has('scam_type')) {
+            $query->where('scam_type', $request->input('scam_type'));
+        }
+
+        if ($request->has('transaction_type')) {
+            $query->where('transaction_type', $request->input('transaction_type'));
+        }
+
+        return response()->json($query->get(), 200);
     }
+
 
     public function store(Request $request)
     {

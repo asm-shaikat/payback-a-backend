@@ -12,6 +12,7 @@ class Service extends Model
     protected $fillable = [
         'fname',
         'lname',
+        'subject',
         'phone',
         'email',
         'scam_type',

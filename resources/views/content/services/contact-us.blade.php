@@ -9,38 +9,6 @@
 @section('content')
 <div class="card">
     <h5 class="card-header">Victim's Info</h5>
-    <div class="card-body">
-        <form method="GET" action="{{ route('services.index') }}" class="row g-3">
-            <div class="col-md-4">
-                <label for="scam_type" class="form-label">Scam Type</label>
-                <select name="scam_type" id="scam_type" class="form-select">
-                    <option value="">All</option>
-                    @foreach ($scamTypes as $type)
-                    <option value="{{ $type }}" {{ request('scam_type') == $type ? 'selected' : '' }}>
-                        {{ $type }}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-md-4">
-                <label for="transaction_type" class="form-label">Transaction Type</label>
-                <select name="transaction_type" id="transaction_type" class="form-select">
-                    <option value="">All</option>
-                    @foreach ($transactionTypes as $type)
-                    <option value="{{ $type }}" {{ request('transaction_type') == $type ? 'selected' : '' }}>
-                        {{ $type }}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-md-4 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary me-2">Filter</button>
-                <a href="{{ route('services.index') }}" class="btn btn-secondary">Reset</a>
-            </div>
-        </form>
-    </div>
 
     <div class="table-responsive text-nowrap">
         <table class="table table-hover">

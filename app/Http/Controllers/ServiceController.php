@@ -8,11 +8,37 @@ use App\Models\Service;
 class ServiceController extends Controller
 {
     // Show all services
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::paginate(10);
-        return view('content.services.service', compact('services'));
+        $query = Service::where('scam_type', '!=', 'Contact Us');
+
+        // Apply filters
+        if ($request->filled('scam_type')) {
+            $query->where('scam_type', $request->input('scam_type'));
+        }
+
+        if ($request->filled('transaction_type')) {
+            $query->where('transaction_type', $request->input('transaction_type'));
+        }
+
+        // Get paginated services
+        $services = $query->paginate(10)->appends($request->all());
+
+        // Fetch unique values for dropdowns (excluding 'Contact Us')
+        $scamTypes = Service::where('scam_type', '!=', 'Contact Us')
+            ->select('scam_type')->distinct()->pluck('scam_type');
+
+        $transactionTypes = Service::select('transaction_type')->distinct()->pluck('transaction_type');
+
+        return view('content.services.service', compact('services', 'scamTypes', 'transactionTypes'));
     }
+
+
+
+
+
+
+
 
     // Show form to create a new service
     public function create()

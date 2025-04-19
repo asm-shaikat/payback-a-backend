@@ -44,6 +44,8 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Authentication Routes
@@ -71,6 +73,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [ServiceController::class, 'show'])->name('services.show');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
+
+    Route::get('/settings', [SettingController::class, 'create'])->name('settings.create');
+    Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
+
+    Route::get('/site-settings', [SiteSettingController::class, 'edit'])->name('site-settings.edit');
+    Route::put('/site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
 
     // layout
     Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');

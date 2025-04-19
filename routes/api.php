@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\LoginOtpController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\SiteSettingsController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -22,6 +23,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [ServiceController::class, 'index']);
         Route::post('/', [ServiceController::class, 'store']);
     });
+
+    Route::get('/site-settings', [SiteSettingsController::class, 'index']);
+    Route::get('/settings/options', [SiteSettingsController::class, 'getDropdownOptions']);
+
+
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

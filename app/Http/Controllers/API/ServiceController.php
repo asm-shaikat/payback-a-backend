@@ -28,6 +28,24 @@ class ServiceController extends Controller
     }
 
 
+    public function getByEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $services = Service::where('email', $request->email)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'email' => $request->email,
+            'total' => $services->count(),
+            'data' => $services
+        ]);
+    }
+
+
+
     public function store(Request $request)
     {
         // Decode raw JSON
@@ -39,6 +57,7 @@ class ServiceController extends Controller
             'lname' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
+            'subject' => 'nullable|string',
             'scam_type' => 'nullable|string|max:255',
             'transaction_type' => 'nullable|string|max:255',
             'scam_amount' => 'nullable|string|max:255',

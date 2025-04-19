@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/site-settings', [SiteSettingsController::class, 'index']);
     Route::get('/settings/options', [SiteSettingsController::class, 'getDropdownOptions']);
-
+    Route::get('/services/by-email', [ServiceController::class, 'getByEmail']);
 
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);

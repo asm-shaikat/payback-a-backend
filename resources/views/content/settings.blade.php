@@ -29,6 +29,7 @@
                     <select class="form-select" id="key" name="key" required>
                         <option value="scam_type">Scam Type</option>
                         <option value="transaction_type">Transaction Type</option>
+                        <option value="subject">Subject</option>
                     </select>
                 </div>
 
